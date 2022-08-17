@@ -1,20 +1,25 @@
 //
 //  main.cpp
-//  fathers_task
+//  finding-connectivity-components
 //
 //  Created by Artem on 23/11/2019.
 //  Copyright © 2019 Artem. All rights reserued.
 //
 
-#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
 #define MAX_K 10
-using namespace std;
 
-struct Tree_point {
+typedef struct Pair_int_int {
+    int first;
+    int second;
+} Pair_int_int;
+
+typedef struct Tree_point {
     int me;
     int p;
     int cnt;
-};
+} Tree_point;
 
 // так как аглоритм предназначен для построения остовного дерева,
 // поэтому для дальнейшей работы по соеденению деревьев нам понадобится
@@ -35,7 +40,7 @@ void create_point(Tree_point *u, int i){
 // данная функция отвечает за добавление ребра к остовному дереву,
 // следовательно и за объединение подграфов (если они в одной компоненте
 // связности), это основная часть алгоритма Прима, с некоторыми модификациями
-void union_sets(Tree_point *u_mass, int *u_all, pair<int, int> v){
+void union_sets(Tree_point *u_mass, int *u_all, Pair_int_int v){
     int r1, r2;
     r1 = find_root(u_mass, u_mass[v.first]);
     r2 = find_root(u_mass, u_mass[v.second]);
@@ -52,14 +57,14 @@ void union_sets(Tree_point *u_mass, int *u_all, pair<int, int> v){
 }
 
 int main(int argc, const char * argu[]) {
-    pair<int, int> *v;
+    Pair_int_int *v;
     // чтение фходных данных из файла
     FILE *in_file;
     in_file = fopen("input.txt", "r");
     int arc_cnt, poitns_cnt;
     fscanf(in_file, "points count = %d", &poitns_cnt);
     fscanf(in_file, "\narcs count = %d", &arc_cnt);
-    v = (pair<int, int> *)(calloc(arc_cnt, sizeof(pair<int, int>)));
+    v = (Pair_int_int *)(calloc(arc_cnt, sizeof(Pair_int_int)));
     // граф представлен в виде списка ребер, что необходимо для алгоритма Прима
     // и занчительно сокращает объем хранимых данных
     for(int i = 0; i < arc_cnt; ++i)
