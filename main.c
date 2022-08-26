@@ -15,6 +15,8 @@ typedef struct Pair_int_int {
     int second;
 } Pair_int_int;
 
+// information about connectivity component that point belongs
+// number of point, root point, size of connectivity component if point is root
 typedef struct Tree_point {
     int me;
     int p;
@@ -30,16 +32,16 @@ int find_root(Tree_point *u_mass, Tree_point u){
     return u.me;
 }
 
-// это что-то около конструктора в классах
+// something like constructor in class
 void create_point(Tree_point *u, int i){
     u->me = i;
     u->p = i;
     u->cnt = 1;
 }
 
-// данная функция отвечает за добавление ребра к остовному дереву,
-// следовательно и за объединение подграфов (если они в одной компоненте
-// связности), это основная часть алгоритма Прима, с некоторыми модификациями
+// this function is adding edge to spanning tree/forest and merging
+// subgraphs (if they are in one connectiviti componenet,
+// this is the main part of Prim algorithm with some modifications
 void union_sets(Tree_point *u_mass, int *u_all, Pair_int_int v){
     int r1, r2;
     r1 = find_root(u_mass, u_mass[v.first]);
@@ -65,29 +67,28 @@ int main(int argc, const char * argu[]) {
     fscanf(in_file, "points count = %d", &poitns_cnt);
     fscanf(in_file, "\narcs count = %d", &arc_cnt);
     v = (Pair_int_int *)(calloc(arc_cnt, sizeof(Pair_int_int)));
-    // граф представлен в виде списка ребер, что необходимо для алгоритма Прима
-    // и занчительно сокращает объем хранимых данных
+    // graph is represented as a list of edges, which is necessary for Prim algorithm
+    // and significantly reduces the amount of stored data
     for(int i = 0; i < arc_cnt; ++i)
         fscanf(in_file, "%d %d", &v[i].first, &v[i].second);
     fclose(in_file);
-    // u_all - это классификация вершин, 0 - вершина изолирована
-    // 1 - вершина является частью компоненты связности,
-    // 2 - вершина является "корнем" компоненты связности и в информации о ней
-    // хранится колличество вершин в компоненте связности
+    // u_all - points classification
+    // 0 - point isalated
+    // 1 - point is a part of connectivity component
+    // 2 - pint is a root of connectivity component
     int *u_all = (int*)calloc(poitns_cnt, sizeof(int));
-    // u_mass - этот массив содержит структуры с ключивыми сведениями о вершинах
-    // № вершины, "предок" и кол-во вершин копоненте связности (если вершина является)
-    // корнем оной
+    // u_mass - array with information of connectivity component
+    // to wich point belongs
     Tree_point *u_mass = (Tree_point *)calloc(poitns_cnt, sizeof(Tree_point));
     for(int i = 0; i < poitns_cnt; ++i)
         create_point(&u_mass[i], i); // не суди меня за этот говнокод =(
-    // в классическом алгоритме Прима используется очередь с приоритетом
-    // но нам это не нужно (хотя бы по тому, что граф не взвешан)
+    // the ordered queue is used in classical Prim algorithm
+    // but in this case it is not necessarily
     for(int i = 0; i < arc_cnt; ++i)
         union_sets(u_mass, u_all, v[i]);
     
-    int *k_cnt = (int *)calloc(MAX_K, sizeof(int)); // это массив с кол-вом компонент
-    // связности (нидекс - размер, значение - кол-во)
+    // array with counts of connectivity components with different size
+    int *k_cnt = (int *)calloc(MAX_K, sizeof(int));
     
     for(int i = 0; i < poitns_cnt; ++i){
         if(u_all[i] == 2)
