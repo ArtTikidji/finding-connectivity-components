@@ -61,7 +61,7 @@ void union_sets(Tree_point *u_mass, int *u_all, Pair_int_int v){
 
 int main(int argc, const char * argu[]) {
     Pair_int_int *v;
-    // чтение фходных данных из файла
+    // reading data from file
     FILE *in_file;
     in_file = fopen("input.txt", "r");
     int arc_cnt, poitns_cnt;
