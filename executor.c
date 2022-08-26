@@ -30,15 +30,15 @@ Pair_int_int* read_grath_from_txt(char* file_path_name, int* points_cnt, int* ar
 // we need to connect their roots,
 // and the next function is designed to find them
 int find_root(Tree_point *u_mass, Tree_point u){
-    while (u.me != u.p)
-        u = u_mass[u.p];
+    while (u.me != u.my_root)
+        u = u_mass[u.my_root];
     return u.me;
 }
 
 // something like constructor in class
 void create_point(Tree_point *u, int i){
     u->me = i;
-    u->p = i;
+    u->my_root = i;
     u->cnt = 1;
 }
 
@@ -53,7 +53,7 @@ void union_sets(Tree_point *u_mass, Pair_int_int v){
         return;
     Tree_point u1 = u_mass[r1];
     Tree_point u2 = u_mass[r2];
-    u1.p = u2.me;
+    u1.my_root = u2.me;
     u2.cnt += u1.cnt;
     u_mass[r1] = u1;
     u_mass[r2] = u2;
@@ -75,10 +75,10 @@ int* components_calculator(int points_cnt, Tree_point* points_info){
     int *k_cnt = (int *)calloc(MAX_K, sizeof(int));
     
     for(int i = 0; i < points_cnt; ++i){
-        if((points_info[i].p == i) && (points_info[i].cnt > 1)){
+        if((points_info[i].my_root == points_info[i].me) && (points_info[i].cnt > 1)){
             ++k_cnt[points_info[i].cnt];
         }
-        if((points_info[i].p == i) && (points_info[i].cnt == 1)){
+        if((points_info[i].my_root == points_info[i].me) && (points_info[i].cnt == 1)){
             ++k_cnt[1];
         }
     }

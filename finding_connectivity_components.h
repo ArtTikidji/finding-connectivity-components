@@ -24,7 +24,7 @@ typedef struct Pair_int_int {
 // number of point, root point, size of connectivity component if point is root
 typedef struct Tree_point {
     int me;
-    int p;
+    int my_root;
     int cnt;
 } Tree_point;
 
