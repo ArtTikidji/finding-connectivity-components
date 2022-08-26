@@ -23,9 +23,10 @@ typedef struct Tree_point {
     int cnt;
 } Tree_point;
 
-// так как аглоритм предназначен для построения остовного дерева,
-// поэтому для дальнейшей работы по соеденению деревьев нам понадобится
-// соединять их корни, а следубющая функция предназначена для поиска оных
+
+//since the aglorithm is intended to build a spanning tree,
+// we need to connect their roots,
+// and the next function is designed to find them
 int find_root(Tree_point *u_mass, Tree_point u){
     while (u.me != u.p)
         u = u_mass[u.p];
