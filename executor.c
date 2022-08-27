@@ -11,7 +11,7 @@
 
 Pair_int_int* read_grath_from_txt(char* file_path_name, int* points_cnt, int* arc_cnt){
     Pair_int_int *v;
-    // reading data from file
+    
     FILE *in_file;
     in_file = fopen(file_path_name, "r");
     fscanf(in_file, "points count = %d", points_cnt);
@@ -26,25 +26,18 @@ Pair_int_int* read_grath_from_txt(char* file_path_name, int* points_cnt, int* ar
 }
 
 
-//since the aglorithm is intended to build a spanning tree,
-// we need to connect their roots,
-// and the next function is designed to find them
 int find_root(Tree_point *u_mass, Tree_point u){
     while (u.me != u.my_root)
         u = u_mass[u.my_root];
     return u.me;
 }
 
-// something like constructor in class
 void create_point(Tree_point *u, int i){
     u->me = i;
     u->my_root = i;
     u->cnt = 1;
 }
 
-// this function is adding edge to spanning tree/forest and merging
-// subgraphs (if they are in one connectiviti componenet,
-// this is the main part of Prim algorithm with some modifications
 void union_sets(Tree_point *u_mass, Pair_int_int v){
     int r1, r2;
     r1 = find_root(u_mass, u_mass[v.first]);
