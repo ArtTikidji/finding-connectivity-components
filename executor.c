@@ -32,7 +32,7 @@ int find_root(Tree_point *u_mass, Tree_point u){
     return u.me;
 }
 
-void create_point(Tree_point *u, int i){
+void init_point(Tree_point *u, int i){
     u->me = i;
     u->my_root = i;
     u->cnt = 1;
@@ -44,18 +44,16 @@ void union_sets(Tree_point *u_mass, Pair_int_int v){
     r2 = find_root(u_mass, u_mass[v.second]);
     if(r1 == r2)
         return;
-    Tree_point u1 = u_mass[r1];
-    Tree_point u2 = u_mass[r2];
-    u1.my_root = u2.me;
-    u2.cnt += u1.cnt;
-    u_mass[r1] = u1;
-    u_mass[r2] = u2;
+    Tree_point* u1 = u_mass + r1;
+    Tree_point* u2 = u_mass + r2;
+    u1->my_root = u2->me;
+    u2->cnt += u1->cnt;
 }
 
 Tree_point* points_classifier(int points_cnt, int arc_cnt, Pair_int_int *v){
     Tree_point *u_mass = (Tree_point *)calloc(points_cnt, sizeof(Tree_point));
     for(int i = 0; i < points_cnt; ++i) {
-        create_point(&u_mass[i], i);
+        init_point(&u_mass[i], i);
     }
     // the ordered queue is used in classical Prim algorithm
     // but in this case it is not necessarily

@@ -38,7 +38,7 @@ Pair_int_int* read_grath_from_txt(char* file_path_name, int* points_cnt, int* ar
 int find_root(Tree_point *u_mass, Tree_point u);
 
 // something like constructor in class
-void create_point(Tree_point *u, int i);
+void init_point(Tree_point *u, int i);
 
 // this function is adding edge to spanning tree/forest and merging
 // subgraphs (if they are in one connectiviti componenet,
