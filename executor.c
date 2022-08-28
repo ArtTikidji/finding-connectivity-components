@@ -65,10 +65,11 @@ int* components_calculator(int points_cnt, Tree_point* points_info){
     int *k_cnt = (int *)calloc(MAX_K, sizeof(int));
     
     for(int i = 0; i < points_cnt; ++i){
-        if((points_info[i].my_root == points_info[i].me) && (points_info[i].cnt > 1)){
+        bool is_me_root = points_info[i].my_root == points_info[i].me;
+        if(is_me_root && (points_info[i].cnt > 1)){
             ++k_cnt[points_info[i].cnt];
         }
-        if((points_info[i].my_root == points_info[i].me) && (points_info[i].cnt == 1)){
+        if(is_me_root && (points_info[i].cnt == 1)){
             ++k_cnt[1];
         }
     }
@@ -83,5 +84,8 @@ int* execute(char* file_name_path){
     
     // array with counts of connectivity components with different size
     int *k_cnt = components_calculator(poitns_cnt, u_mass);
+    
+    free(v);
+    free(u_mass);
     return k_cnt;
 }

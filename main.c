@@ -14,6 +14,6 @@ int main(int argc, const char * argu[]) {
     
     for(int i = 1; i < MAX_K; ++i)
         printf("%d cnt = %d\n", i, k_cnt[i]);
-    
+    free(k_cnt);
     return 0;
 }
