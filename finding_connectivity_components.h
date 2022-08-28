@@ -35,7 +35,7 @@ Pair_int_int* read_grath_from_txt(char* file_path_name, int* points_cnt, int* ar
 //since the aglorithm is intended to build a spanning tree,
 // we need to connect their roots,
 // and the next function is designed to find them
-int find_root(Tree_point *u_mass, Tree_point u);
+int find_root(Tree_point *u_mass, Tree_point *u);
 
 // something like constructor in class
 void init_point(Tree_point *u, int i);

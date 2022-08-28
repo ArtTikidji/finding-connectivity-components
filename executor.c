@@ -26,10 +26,10 @@ Pair_int_int* read_grath_from_txt(char* file_path_name, int* points_cnt, int* ar
 }
 
 
-int find_root(Tree_point *u_mass, Tree_point u){
-    while (u.me != u.my_root)
-        u = u_mass[u.my_root];
-    return u.me;
+int find_root(Tree_point *u_mass, Tree_point *u){
+    while (u->me != u->my_root)
+        u = u_mass + u->my_root;
+    return u->me;
 }
 
 void init_point(Tree_point *u, int i){
@@ -40,8 +40,8 @@ void init_point(Tree_point *u, int i){
 
 void union_sets(Tree_point *u_mass, Pair_int_int v){
     int r1, r2;
-    r1 = find_root(u_mass, u_mass[v.first]);
-    r2 = find_root(u_mass, u_mass[v.second]);
+    r1 = find_root(u_mass, u_mass + v.first);
+    r2 = find_root(u_mass, u_mass + v.second);
     if(r1 == r2)
         return;
     Tree_point* u1 = u_mass + r1;
