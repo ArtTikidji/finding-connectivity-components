@@ -29,7 +29,7 @@ typedef struct Tree_point {
 } Tree_point;
 
 
-Pair_int_int* read_grath_from_txt(char* file_path_name, int* points_cnt, int* arc_cnt);
+Pair_int_int* read_grath_from_txt(const char* file_path_name, int* points_cnt, int* arc_cnt);
 
 
 //since the aglorithm is intended to build a spanning tree,

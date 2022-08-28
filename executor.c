@@ -9,11 +9,10 @@
 #include "finding_connectivity_components.h"
 
 
-Pair_int_int* read_grath_from_txt(char* file_path_name, int* points_cnt, int* arc_cnt){
+Pair_int_int* read_grath_from_txt(const char* file_path_name, int* points_cnt, int* arc_cnt){
     Pair_int_int *v;
     
-    FILE *in_file;
-    in_file = fopen(file_path_name, "r");
+    FILE *in_file = fopen(file_path_name, "r");
     fscanf(in_file, "points count = %d", points_cnt);
     fscanf(in_file, "\narcs count = %d", arc_cnt);
     v = (Pair_int_int *)(calloc(*arc_cnt, sizeof(Pair_int_int)));
