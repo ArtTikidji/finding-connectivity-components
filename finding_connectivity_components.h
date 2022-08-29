@@ -49,6 +49,6 @@ void union_sets(Tree_point *u_mass, Pair_int_int v);
 Tree_point* points_classifier(int points_cnt, int arc_cnt, Pair_int_int *v);
 int* components_calculator(int points_cnt, Tree_point* points_info);
 
-int* execute(char* file_name_path);
+int* finding_connectivity_components(char* file_name_path);
 
 #endif /* finding_connectivity_components_h */

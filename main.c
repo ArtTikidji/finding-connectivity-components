@@ -10,7 +10,7 @@
 
 int main(int argc, const char * argu[]) {
     
-    int *k_cnt = execute("input.txt");
+    int *k_cnt = finding_connectivity_components("input.txt");
     
     for(int i = 1; i < MAX_K; ++i)
         printf("%d cnt = %d\n", i, k_cnt[i]);

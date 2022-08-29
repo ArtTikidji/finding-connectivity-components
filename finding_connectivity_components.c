@@ -76,7 +76,7 @@ int* components_calculator(int points_cnt, Tree_point* points_info){
     return k_cnt;
 }
 
-int* execute(char* file_name_path){
+int* finding_connectivity_components(char* file_name_path){
     int arc_cnt, poitns_cnt;
     Pair_int_int *v = read_grath_from_txt(file_name_path, &poitns_cnt, &arc_cnt);
     // u_mass - points description
