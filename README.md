@@ -1,14 +1,10 @@
 # finding-connectivity-components
 
-Данный алгоритм предназначен для нахождения компонент связности в не взвешенном, не ориентированном графе и является модернизацией алгоритма Прима.
-Краткое описание алгоритма Прима (на пальцах):
-Алгоритм Прима предназначен для построения основного дерева на не ориентированном графе, для работы алгоритма граф представляется в виде списка ребер. Принцип работы алгоритма заключается в том, чтобы отсортировать ребра по возрастанию и по одной добавлять в результирующий граф, таким образом, чтобы в результирующем графе не образовывалось циклов (т.е. чтоб он был деревом или лесом).
-Модернизация алгоритма: 
-  Для того, чтобы посчитать кол-во компонентов связности, необходимо найти количество деревьев в результирующем графе и кол-во вершин в каждом дереве. Для этого при добавлении каждого нового ребра возможны следующие варианты:
-  Соединены две изолированные вершины: тогда одна назначается корнем дерева (в специальном массиве выставляется значение “2”). В информации о вершине, пишется что в “ее дереве” 2 вершины, предком вершины назначается она сама. А вторая вершина обозначается принадлежащий к дереву (в специальном массиве выставляется значение “1”), предком вершины назначается “первая” вершина.
-  Если ребро соединяет два дерева: первым шагом находятся корни обоих деревьев, далее все действия производятся с найдеными корнями. Первый корень обозначается корнем общего дерева (в специальном массиве выставляется значение “2”), а к кол-ву вершин в “его” дереве, прибавляется кол-во вершин во втором дереве. Второй корень обозначается вершиной принадлежащий дереву (в специальном массиве “2” заменяется на “1”).
-  Если ребро соединяет вершины одного дерева, то ничего не происходит (это проверяется тем, что у вершин один корень)
-  Остальные случаи сводятся ко 2му, а в программе все случаи описаны одним алгоритмом, потому описывать их не вижу смысла
-Когда все ребра рассмотрены, проходим по массиву обозначений вершин, и подсчитываем кол-во вершин в каждом дереве. Тоесть если вершина - корень, смотрим сколько вершин в “ее дереве” и увеличиваем счетчик у кол-ва компонент соответствующего размера, если вершина изолирована, увеличиваем счетчик изолированных вершин.
-Описание входного файла:
-В первой строке - кол-во вершин в графе. Вторая строка - кол-во ребер в графе, далее строки из пар чисел, т.е. список ребер. В результате работы программы, она выводит в консоль кол-ва компонент связности с размерами от 1 до 9.
+This algorithm is designed to find connectivity components in an unweighted, unoriented graph and is a adaptation of Prim's algorithm. 
+Prim's algorithm is designed to construct a spanning tree on an unoriented graph, the graph is represented as a list of edges for the algorithm to work. The principle of Prim's algorithm is to sort the edges by increasing weight and add one by one to the resulting graph so that the resulting graph does not form cycles (i.e. that it is a tree or a forest). 
+
+Adaptation of the algorithm: To calculate the number of connectivity components, you need to find the number of trees in the resulting graph and the number of vertices in each tree. To do this, each new edge can be added as follows: Two isolated vertices are connected: then one is assigned as the root of the tree. In the information about the root, it is written that there are 2 vertices in "its tree", the root of the vertex is assigned to itself. And the second vertex is designated as belonging to the tree, its root is assigned to the "first" vertex. If an edge connects two trees: the first step is to find the roots of both trees, then all actions are performed with the found roots. The first root is the root of the common tree, and the number of vertices in "his" tree is added to the number of vertices in the second tree. The second root is denoted by the vertex belonging to the tree. If an edge connects vertices of the same tree, nothing happens (this is checked by the fact that the vertices have the same root).
+When all edges are processed, and count the number of components of each size. I.e. we count the number of components of each size (the data are taken from the vertices designated as roots) and store them in an appropriate array. Isolated vertices are also marked as roots. 
+
+Input file description: The first line is the number of vertices in the graph. The second line is the number of edges in the graph, then strings of pairs of numbers, i.e. a list of edges.
+The program prints to the console the number of connectivity components with sizes from 1 to 9.
