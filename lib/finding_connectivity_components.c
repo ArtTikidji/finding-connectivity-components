@@ -6,7 +6,7 @@
 //  Copyright © 2022 Artem. All rights reserved.
 //
 
-#include "finding_connectivity_components.h"
+#include "../include/finding_connectivity_components.h"
 
 
 Pair_int_int* read_grath_from_txt(const char* file_path_name, int* points_cnt, int* arc_cnt){
